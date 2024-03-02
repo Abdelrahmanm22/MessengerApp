@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('message_id')->constrained('messages')->cascadeOnDelete();
             $table->timestamp('read_at')->nullable();
             $table->softDeletes(); ////في حالة ان  مستخدم مش صاحب الرساله حذف الرساله من عنده هو
+            $table->primary(['user_id','message_id']);  ////الuserID مع الmessageID هيكونو primary key
         });
     }
 

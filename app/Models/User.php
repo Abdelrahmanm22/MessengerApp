@@ -41,4 +41,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function chats()
+    {
+        return $this->belongsToMany(Chat::class,'chats')->withPivot(['role','joined_at']);
+    }
+
+    ////الuser عنده علاقتين مع الmessages في رسايل هو بعتها وفي رسايل استقبلها
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class,'user_id','id');
+    }
+    public function receivedMessages()
+    {
+        return $this->belongsToMany(Message::class,'recipients')->withPivot([
+            'reade_at','deleted_at'
+        ]);
+    }
 }

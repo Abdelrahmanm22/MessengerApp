@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->enum('role',['admin','member'])->default('member'); ////for permissions for each user
             $table->timestamp('joined_at');
+            $table->primary(['chat_id','user_id']);  ////الuserID مع الchatID هيكونو primary key
         });
     }
 
